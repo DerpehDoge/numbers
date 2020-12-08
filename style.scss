@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap');
+
+$baseWidth: 100px;
+
+:root {
+  --skew: 5deg;
+}
+#backgroundTime {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -10;
+  text-align: center;
+  font-size: 14em;
+  font-weight: bold;
+  opacity: 0.03;
+  color: lightyellow;
+}
+
+#background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -5;
+  text-align: center;
+  font-size: 2em; }
+
+
+#bottom {
+  width: 100vw;
+  height: 15vh;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-weight: lighter;
+  font-size: 1.3em;
+}
+
+@keyframes zoomIn {
+  0% {
+    opacity: 0.1;
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 6em;
+  }
+  20% {
+    opacity: 1;
+    font-size: 8em;
+  }
+  100% {
+    opacity: 0;
+    color: rgba(82, 214, 104, 0.507);
+    font-size: 9em;
+  }
+}
+
+@keyframes zoomOut {
+  0% {
+    opacity: 0.1;
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 9em;
+  }
+  20% {
+    opacity: 1;
+    font-size: 8em;
+  }
+  100% {
+    opacity: 0;
+    color: rgba(231, 66, 66, 0.507);
+    font-size: 6em;
+  }
+}
+
+
+.multiplier {
+  animation: zoomIn 1s forwards;
+  font-size: 5em;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 5px;
+}
+
+body {
+  background-color: black;
+  color: white;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  text-align: center;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.wmultiplier {
+  animation: zoomOut 1s forwards;
+  font-size: 5em;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 5px;
+}
+
+
+h1 {
+  color: white;
+}
+
+#app {
+  display: inherit;
+}
+
+form {
+  display: inherit;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+input {
+  font-family: 'Space Grotesk', sans-serif;
+  background: transparent;
+  border: 0;
+  width: $baseWidth;
+  border-bottom: 2px solid white;
+  text-align: center;
+  color: white;
+  outline: 0;
+  font-size: 2em;
+  padding: 5px;
+  transition: 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes inputCorrect {
+  0% {
+    width: $baseWidth;
+    border: 0;
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 1.6em;
+  }
+  10% {
+    width: $baseWidth * 5/3;
+    padding: 0px;
+    color: rgb(104, 208, 114);
+    font-size: 3em;
+  }
+  100% {
+    width: $baseWidth;
+    padding: 0;
+    border: 0;
+    color: rgb(144, 238, 144);
+    font-size: 1.6em;
+  }
+}
+
+@keyframes inputIncorrect {
+  0% {
+    width: $baseWidth;
+    border: 0;
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 1.6em;
+  }
+  10% {
+    width: $baseWidth;
+    transform: rotate(3deg);
+    color: lightcoral;
+    font-size: 1.8em;
+  }
+  100% {
+    width: $baseWidth;
+    padding: 0;
+    border: 0;
+    color: salmon;
+    font-size: 1.6em;
+  }
+}
+
+input.waiting {
+  border: 0;
+  font-size: 1.6em;
+  width: $baseWidth;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+input.correct {
+  animation: inputCorrect 1.25s forwards;
+}
+
+input.incorrect {
+  animation: inputIncorrect 1.25s forwards;
+}
+
+.tq {
+  font-size: 1.6em;
+  letter-spacing: 2px;
+  display: inline-block;
+}
+
+.pinyin {
+  position: relative;
+  display: inline-block;
+  color: lightsalmon  ;
+}
+
+.pinyin::before {
+  content: attr(pinyin);
+  opacity: 0;
+  width: 120px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+  color: #fff;
+  text-align: center;
+  font-size: 0.8em;
+  padding: 5px 0;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+  transition: 0.25s ease-in-out;
+}
+
+.pinyin:hover::before {
+  opacity: 1;
+}
+
+#error {
+  display: flex;
+  color: coral;
+  opacity: 0.3;
+  font-size: 12rem;
+  position: absolute;
+  z-index: -100;
+}
+
+#errMess {
+  color: greenyellow;
+}
+
+.type {
+  font-weight: lighter;
+  opacity: 0.2;
+}
